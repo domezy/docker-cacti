@@ -1,7 +1,7 @@
 version: '2'
 services:
   cacti:
-    image: domezy/cacti:0.8.8h
+    image: domezy/cacti:0.8.8h-fpm-alpine
     container_name: cacti
     depends_on:
       - mysql
