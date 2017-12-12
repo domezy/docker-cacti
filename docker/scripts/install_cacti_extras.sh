@@ -5,7 +5,7 @@ install_plugins(){
   plugins_list="plugin:settings-v0.71-1.tgz plugin:thold-v0.5.0.tgz plugin:realtime-v0.5-2.tgz plugin:monitor-v1.2-1.tgz plugin:hmib-v1.4-2.tgz plugin:rrdclean-v0.41.tgz plugin:errorimage-v0.2-1.tgz plugin:ugroup-v0.2-2.tgz plugin:aggregate-v0.75.tgz"
   not_avaible_plugins_list="plugin:syslog-v1.22-2.tgz"
   for plugin in $plugins_list; do
-    wget http://docs.cacti.net/_media/$plugin \
+    wget --no-check-certificate https://docs.cacti.net/_media/$plugin \
     && tar xvzf $plugin \
     && rm -rf $plugin
   done

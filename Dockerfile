@@ -69,7 +69,8 @@ RUN set -x \
 && cp /docker/configurations/cacti/global.php /usr/share/nginx/cacti/include/global.php \
 && echo  "*/5 * * * * php /usr/share/nginx/cacti/poller.php > /dev/null 2>&1" > /var/spool/cron/crontabs/nginx \
 && sh /docker/scripts/install_cacti_extras.sh \
-&& tar xzvf /docker/plugins/mURLin-0.2.4.tar.gz  -C /usr/share/nginx/cacti/plugins/
+&& tar xzvf /docker/plugins/mURLin-0.2.4.tar.gz  -C /usr/share/nginx/cacti/plugins/ \
+&& chown -R nginx:nginx /usr/share/nginx/cacti/plugins/*
 
 ########### EXPOSE SNMP PORT ###########
 EXPOSE $SNMP_PORT/$SNMP_PORT_PROTO
