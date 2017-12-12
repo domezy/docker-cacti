@@ -1,0 +1,35 @@
+version: '2'
+services:
+  cacti:
+    image: domezy/cacti:0.8.8h
+    container_name: cacti
+    depends_on:
+      - mysql
+    ports:
+      - "161/udp:161/udp"  #BIND SMTP PORT TO HOST
+      - "80:80"            #BIND HTTP PORT TO HOST
+    networks:
+      - database
+      - nginx
+    env_file: .env.cacti
+    restart: always
+
+  mysql:
+    image: mysql:5.6
+    container_name: mysql
+    command: --sql-mode=NO_ENGINE_SUBSTITUTION
+    volumes:
+      - ./mysql:/var/lib/mysql  #STORE MYSQL DATA INTO HOST FOLDER
+      - ./cacti.sql:/docker-entrypoint-initdb.d/cacti.sql #IMPORT CACTI EMPITY SQL IN MYSQL DB
+    networks:
+      - database
+    env_file: .env.mysql
+    restart: always
+
+networks:
+  database:
+    external:
+      name: private
+  nginx:
+    external:
+      name: public
