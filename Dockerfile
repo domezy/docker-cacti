@@ -25,7 +25,7 @@ RUN apk add --no-cache --virtual .spine-build-deps \
     g++ \
     gcc \
     libc-dev \
-    make 
+    make
     # \openssl-dev
 
 
@@ -40,7 +40,6 @@ RUN set -x \
 && rm -rf cacti-"$CACTI_VERSION".tar.gz cacti-"$CACTI_VERSION"
 
 ########### DOWNLOAD SPINE ###########
-
 WORKDIR /usr/share/nginx/
 RUN set -x \
 && wget --no-check-certificate https://www.cacti.net/downloads/spine/cacti-spine-"$CACTI_VERSION".tar.gz \
@@ -69,7 +68,8 @@ RUN set -x \
 && cp /docker/configurations/cacti/config.php /usr/share/nginx/cacti/include/config.php \
 && cp /docker/configurations/cacti/global.php /usr/share/nginx/cacti/include/global.php \
 && echo  "*/5 * * * * php /usr/share/nginx/cacti/poller.php > /dev/null 2>&1" > /var/spool/cron/crontabs/nginx \
-&& sh /docker/scripts/install_cacti_extras.sh
+&& sh /docker/scripts/install_cacti_extras.sh \
+&& tar xzvf /plugins/mURLin-0.2.4.tar.gz  -C /usr/share/nginx/cacti/plugins/
 
 ########### EXPOSE SNMP PORT ###########
 EXPOSE $SNMP_PORT/$SNMP_PORT_PROTO
