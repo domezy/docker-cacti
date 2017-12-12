@@ -7,7 +7,7 @@ services:
       - mysql
     ports:
       - "161/udp:161/udp"  #BIND SMTP PORT TO HOST
-      - "80:80"            #BIND HTTP PORT TO HOST
+      - "9012:80"            #BIND HTTP PORT TO HOST
     networks:
       - database
       - nginx
