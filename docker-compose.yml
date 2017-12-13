@@ -20,7 +20,7 @@ services:
     command: --sql-mode=NO_ENGINE_SUBSTITUTION
     volumes:
       - ./mysql:/var/lib/mysql  #STORE MYSQL DATA INTO HOST FOLDER
-      - ./cacti.sql:/docker-entrypoint-initdb.d/cacti.sql #IMPORT CACTI EMPITY SQL IN MYSQL DB
+      - ./cacti-0.8.8b.sql:/docker-entrypoint-initdb.d/cacti.sql #IMPORT CACTI EMPITY SQL IN MYSQL DB
     networks:
       - database
     env_file: .env.mysql
