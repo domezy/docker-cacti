@@ -12,6 +12,7 @@ services:
     volumes:
       - ./docker/configurations/cacti/global.php:/opt/cacti/include/global.php
       - ./docker/configurations/cacti/global.php:/opt/cacti/include/config.php
+      - ./docker/configurations/cacti/cacti.conf:/etc/httpd/conf.d/cacti.conf
     networks:
       - app_net_1
     #env_file: .env.cacti
