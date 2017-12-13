@@ -3,14 +3,13 @@ services:
   cacti:
     image: domezy/cacti:0.8.8h-fpm-alpine
     container_name: cacti
-    depends_on:
+    links:
       - mysql
     ports:
       - "161:161"  #BIND SMTP PORT TO HOST
       - "9012:80"            #BIND HTTP PORT TO HOST
     networks:
-      - database
-      - nginx
+      - app_net_1
     env_file: .env.cacti
     restart: always
 
@@ -22,14 +21,15 @@ services:
       - ./mysql:/var/lib/mysql  #STORE MYSQL DATA INTO HOST FOLDER
       - ./cacti-0.8.8b.sql:/docker-entrypoint-initdb.d/cacti.sql #IMPORT CACTI EMPITY SQL IN MYSQL DB
     networks:
-      - database
+      - app_net_1
     env_file: .env.mysql
     restart: always
 
 networks:
-  database:
-    external:
-      name: private
-  nginx:
-    external:
-      name: public
+   app_net_1:
+     driver: bridge
+     ipam:
+      driver: default
+      config:
+      - subnet: 10.100.3.0/24
+        ip_range: 10.100.3.2/24
