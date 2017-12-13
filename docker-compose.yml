@@ -9,9 +9,12 @@ services:
     ports:
       - "161:161"  #BIND SMTP PORT TO HOST
       - "9012:80"            #BIND HTTP PORT TO HOST
+    volumes:
+      - ./docker/configurations/cacti/global.php:/opt/cacti/include/global.php
+      - ./docker/configurations/cacti/global.php:/opt/cacti/include/config.php
     networks:
       - app_net_1
-    env_file: .env.cacti
+    #env_file: .env.cacti
     restart: always
 
   mysql:
