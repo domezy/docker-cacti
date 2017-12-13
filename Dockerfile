@@ -2,7 +2,7 @@ FROM nginx:stable-alpine
 LABEL mantainer="Giuseppe Iannelli"
 
 ########### ENVS ###########
-ENV CACTI_VERSION=0.8.8h \
+ENV CACTI_VERSION=0.8.8b \
 SNMP_PORT=161 \
 SNMP_PORT_PROTO=udp \
 DB_TYPE=mysql \
